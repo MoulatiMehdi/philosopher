@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosopher.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/14 19:46:06 by mmoulati          #+#    #+#             */
+/*   Updated: 2025/03/14 19:46:08 by mmoulati         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosopher.h"
 
 t_philo	*ft_philosopher_new(void)
@@ -10,7 +22,10 @@ t_philo	*ft_philosopher_new(void)
 		return (NULL);
 	philosopher->id = id;
 	philosopher->state = STATE_THINKING;
-	philosopher->last_meal = ft_timestamp();
+	philosopher->last_meal = 0;
+	philosopher->fork_left = NULL;
+	philosopher->fork_right = NULL;
+	id++;
 	return (philosopher);
 }
 
