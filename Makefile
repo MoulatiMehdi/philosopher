@@ -1,7 +1,7 @@
 
 CC = cc 
 
-CCFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CCFLAGS = -Wall -Wextra -g #-fsanitize=address
 
 
 NAME = philosopher 

@@ -6,49 +6,53 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 19:45:59 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/14 19:46:36 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/15 22:12:22 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+#include <bits/pthreadtypes.h>
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void	*func(void *arg)
 {
 	t_philo	*philosopher;
 
 	philosopher = arg;
+	philosopher->last_meal = ft_timestamp();
 	while (1)
 	{
-		ft_philo_think(philosopher);
+		pthread_mutex_lock(philosopher->lock_dead);
+		if (*philosopher->stop)
+		{
+			pthread_mutex_unlock(philosopher->lock_dead);
+			break ;
+		}
+		pthread_mutex_unlock(philosopher->lock_dead);
 		ft_philo_eat(philosopher);
 		ft_philo_sleep(philosopher);
+		ft_philo_think(philosopher);
 	}
 	return (NULL);
 }
+
 int	main(int argc, char **argv)
 {
-	t_table	*table;
-	t_philo	*philosopher;
-	int		i;
+	t_table		*table;
+	pthread_t	observer;
 
 	if (argc != 5 && argc != 6)
 	{
-		printf("./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [nbr_of_times_each_philosopher_must_eat]");
+		printf("./philo nbr_philos time_die time_eat time_sleep ");
+		printf("[nbr_meals_per_philo]\n");
 		return (0);
 	}
 	table = ft_table_new(argc, argv);
-	i = 0;
-	while (i < table->size)
-	{
-		philosopher = table->philosophers[i];
-		pthread_create(&philosopher->thread, NULL, func, philosopher);
-		i++;
-	}
-	i = 0;
-	while (i < table->size)
-	{
-		pthread_join(table->philosophers[i]->thread, NULL);
-		i++;
-	}
+	ft_threads_create(&observer, table);
+	ft_threads_join(&observer, table);
+	ft_threads_detach(table);
+	ft_table_destroy(&table);
 	return (0);
 }

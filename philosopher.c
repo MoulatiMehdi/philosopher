@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 19:46:06 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/14 19:46:08 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/15 20:54:51 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,52 @@
 
 t_philo	*ft_philosopher_new(void)
 {
-	static int	id = 1;
-	t_philo		*philosopher;
+	t_philo	*philosopher;
 
 	philosopher = malloc(sizeof(t_philo));
 	if (philosopher == NULL)
 		return (NULL);
-	philosopher->id = id;
 	philosopher->last_meal = 0;
 	philosopher->fork_left = NULL;
 	philosopher->fork_right = NULL;
+	philosopher->meal_check = NULL;
+	philosopher->lock_dead = NULL;
 	philosopher->eaten = 0;
 	philosopher->time_die = 0;
 	philosopher->time_eat = 0;
 	philosopher->time_sleep = 0;
-	philosopher->min_eat = -1;
-	id++;
+	philosopher->min_eat = 0;
 	return (philosopher);
 }
 
-t_philo	**ft_philosophers_new(long n)
+void	ft_philosopher_destroy(t_philo **philosopher)
 {
-	long	i;
-	t_philo	**philosophers;
+	free(*philosopher);
+	*philosopher = NULL;
+}
 
-	philosophers = malloc(sizeof(t_philo *) * (n + 1));
-	if (philosophers == NULL)
-		return (NULL);
-	memset(philosophers, 0, sizeof(t_philo *) * (n + 1));
-	i = 0;
-	while (i < n)
+bool	ft_philo_isdead(t_philo *philo)
+{
+	bool	ans;
+
+	pthread_mutex_lock(philo->meal_check);
+	if (philo->last_meal == 0)
+		ans = false;
+	else
 	{
-		philosophers[i] = ft_philosopher_new();
-		i++;
+		ans = (ft_timestamp() - philo->last_meal > philo->time_die)
+			&& philo->state != EATING;
 	}
-	return (philosophers);
+	pthread_mutex_unlock(philo->meal_check);
+	return (ans);
+}
+
+bool	ft_philo_isfull(t_philo *philo)
+{
+	bool	ans;
+
+	pthread_mutex_lock(philo->meal_check);
+	ans = philo->eaten >= philo->min_eat;
+	pthread_mutex_unlock(philo->meal_check);
+	return (ans);
 }
