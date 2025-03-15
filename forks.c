@@ -35,6 +35,7 @@ t_fork	**ft_forks_new(long n)
 			free(forks);
 			return (NULL);
 		}
-	}
+	    i++;
+    }
 	return (forks);
 }

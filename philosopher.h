@@ -33,21 +33,26 @@ typedef enum e_state
 typedef struct s_philo
 {
 	long				id;
+	long eaten;
+	long				min_eat;
 	long				last_meal;
-	t_state				state;
-	pthread_t			thread;
+	long				time_sleep;
+	long				time_eat;
+	long				time_die;
+    pthread_t			thread;
 	t_fork				*fork_left;
 	t_fork				*fork_right;
 }						t_philo;
 
 typedef struct s_table
 {
+	long				min_eat;
 	long				time_sleep;
 	long				time_eat;
 	long				time_die;
-	long				min_eat;
 	t_philo				**philosophers;
 	t_fork				**forks;
+    long size;
 }						t_table;
 
 long					ft_timestamp(void);
