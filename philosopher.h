@@ -17,50 +17,67 @@
 # include "pthread.h"
 # include <bits/pthreadtypes.h>
 # include <bits/types/struct_timeval.h>
+# include <stdbool.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
+# include <unistd.h>
 
 typedef pthread_mutex_t	t_fork;
 
-typedef enum e_state
+typedef enum e_action
 {
-	STATE_DYING,
-	STATE_THINKING,
-	STATE_EATING
+	EATING,
+	THINKING,
+	SLEEPING
 }						t_state;
 
 typedef struct s_philo
 {
-	long				id;
-	long eaten;
+	size_t				id;
 	long				min_eat;
-	long				last_meal;
-	long				time_sleep;
-	long				time_eat;
-	long				time_die;
-    pthread_t			thread;
+	size_t				eaten;
+	size_t				last_meal;
+	size_t				time_sleep;
+	size_t				time_eat;
+	size_t				time_die;
+	pthread_t			thread;
+	t_state				state;
 	t_fork				*fork_left;
 	t_fork				*fork_right;
+	bool				*stop;
 }						t_philo;
 
 typedef struct s_table
 {
-	long				min_eat;
-	long				time_sleep;
-	long				time_eat;
-	long				time_die;
+	size_t				min_eat;
+	size_t				time_sleep;
+	size_t				time_eat;
+	size_t				time_die;
 	t_philo				**philosophers;
 	t_fork				**forks;
-    long size;
+	long				size;
+	bool				stop;
 }						t_table;
 
-long					ft_timestamp(void);
+size_t					ft_timestamp(void);
+int						ft_msleep(size_t msec);
 
 t_philo					*ft_philosopher_new(void);
 t_philo					**ft_philosophers_new(long n);
 
 t_fork					**ft_forks_new(long n);
+
+void					ft_fork_take(t_fork *fork, size_t id);
+void					ft_fork_put(t_fork *fork);
+
 t_table					*ft_table_new(int argc, char **argv);
+
+void					ft_philo_fork_take(t_philo *philosopher, t_fork *fork);
+void					ft_philo_fork_put(t_fork *fork);
+void					ft_philo_eat(t_philo *philosopher);
+void					ft_philo_sleep(t_philo *philosopher);
+void					ft_philo_think(t_philo *philosopher);
 
 #endif

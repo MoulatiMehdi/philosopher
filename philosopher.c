@@ -24,11 +24,11 @@ t_philo	*ft_philosopher_new(void)
 	philosopher->last_meal = 0;
 	philosopher->fork_left = NULL;
 	philosopher->fork_right = NULL;
-    philosopher->eaten = 0;
-    philosopher->time_die = 0;
-    philosopher->time_eat = 0;
-    philosopher->time_sleep = 0;
-    philosopher->min_eat = -1;
+	philosopher->eaten = 0;
+	philosopher->time_die = 0;
+	philosopher->time_eat = 0;
+	philosopher->time_sleep = 0;
+	philosopher->min_eat = -1;
 	id++;
 	return (philosopher);
 }

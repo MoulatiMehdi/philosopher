@@ -11,11 +11,22 @@
 /* ************************************************************************** */
 
 #include "philosopher.h"
+#include <stdio.h>
 
-long	ft_timestamp(void)
+size_t	ft_timestamp(void)
 {
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+int	ft_msleep(size_t msec)
+{
+	size_t	curr;
+
+	curr = ft_timestamp();
+	while (ft_timestamp() - curr < msec)
+		usleep(500);
+	return (0);
 }
