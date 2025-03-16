@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 19:45:47 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/15 22:06:08 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/16 19:46:13 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,25 @@ void	ft_forks_destroy(t_mutex ***forks)
 	}
 	free(*forks);
 	*forks = NULL;
+}
+
+t_mutex	*ft_mutex_new(void)
+{
+	t_mutex	*mutex;
+
+	mutex = malloc(sizeof(t_mutex));
+	if (mutex == NULL)
+		return (NULL);
+	pthread_mutex_init(mutex, NULL);
+	return (mutex);
+}
+
+void	ft_mutex_destroy(t_mutex **mutex)
+{
+	if (mutex == NULL || *mutex == NULL)
+		return ;
+	pthread_mutex_unlock(*mutex);
+	pthread_mutex_destroy(*mutex);
+	free(*mutex);
+	*mutex = NULL;
 }

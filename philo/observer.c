@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:24:28 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/16 16:57:01 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/16 23:36:33 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ void	*ft_observer_should_stop(void *arg)
 	t_table	*table;
 
 	table = arg;
+	pthread_mutex_lock(table->lock_dead);
+	if (table->stop)
+	{
+		pthread_mutex_unlock(table->lock_dead);
+		return (NULL);
+	}
+	pthread_mutex_unlock(table->lock_dead);
 	while (1)
 	{
 		if (ft_observer_dead(table) || ft_observer_ate(table))

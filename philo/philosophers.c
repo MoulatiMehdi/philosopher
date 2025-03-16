@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:54:29 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/15 16:54:29 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/16 21:13:21 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	ft_philosophers_destroy(t_philo ***philosophers)
 	size_t	i;
 
 	i = 0;
+	if (philosophers == NULL || *philosophers == NULL)
+		return ;
 	while ((*philosophers)[i])
 	{
 		ft_philosopher_destroy(&(*philosophers)[i]);

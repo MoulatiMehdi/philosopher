@@ -1,8 +1,7 @@
 
 CC = cc 
 
-CCFLAGS = -Wall -Wextra -g #-fsanitize=address
-
+CCFLAGS = -Wall -Wextra #-g -fsanitize=address
 
 NAME = philo 
 SRCS = $(wildcard *.c) 
