@@ -17,7 +17,7 @@ void	ft_message(t_philo *philosopher, char *str)
 {
 	pthread_mutex_lock(philosopher->lock_dead);
 	if (*philosopher->stop == false)
-		printf("%ld %ld %s\n", ft_timestamp()/1000, philosopher->id, str);
+		printf("%ld %ld %s\n", ft_timestamp() / 1000, philosopher->id, str);
 	pthread_mutex_unlock(philosopher->lock_dead);
 }
 
@@ -26,19 +26,15 @@ void	ft_philo_eat(t_philo *philosopher)
 	pthread_mutex_lock(philosopher->fork_right);
 	ft_message(philosopher, "has taken a fork");
 	pthread_mutex_lock(philosopher->fork_left);
-    ft_message(philosopher, "has taken a fork");
-
-    philosopher->iseating = true;
+	ft_message(philosopher, "has taken a fork");
+	philosopher->iseating = true;
 	ft_message(philosopher, "is eating");
-    pthread_mutex_lock(philosopher->meal_check);
+	pthread_mutex_lock(philosopher->meal_check);
 	philosopher->last_meal = ft_timestamp();
 	philosopher->eaten++;
 	pthread_mutex_unlock(philosopher->meal_check);
-
-    ft_msleep(philosopher->time_eat);
+	ft_msleep(philosopher->time_eat);
 	philosopher->iseating = false;
-	
-    pthread_mutex_unlock(philosopher->fork_right);
+	pthread_mutex_unlock(philosopher->fork_right);
 	pthread_mutex_unlock(philosopher->fork_left);
 }
-

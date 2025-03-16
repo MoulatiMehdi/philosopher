@@ -32,9 +32,9 @@ void	*func(void *arg)
 		}
 		pthread_mutex_unlock(philosopher->lock_dead);
 		ft_philo_eat(philosopher);
-	    ft_message(philosopher, "is sleeping");
-	    ft_msleep(philosopher->time_sleep);
-	    ft_message(philosopher, "is thinking");
+		ft_message(philosopher, "is sleeping");
+		ft_msleep(philosopher->time_sleep);
+		ft_message(philosopher, "is thinking");
 	}
 	return (NULL);
 }

@@ -25,7 +25,7 @@ int	ft_msleep(size_t msec)
 {
 	size_t	curr;
 
-	curr = ft_timestamp() ;
+	curr = ft_timestamp();
 	while (ft_timestamp() - curr < msec * 1000)
 		usleep(500);
 	return (0);

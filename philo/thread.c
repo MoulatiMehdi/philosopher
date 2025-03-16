@@ -12,7 +12,7 @@
 
 #include "philosopher.h"
 
-void	ft_threads_wait(pthread_t *observer,t_table *table)
+void	ft_threads_wait(pthread_t *observer, t_table *table)
 {
 	size_t	i;
 

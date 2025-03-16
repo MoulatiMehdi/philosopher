@@ -94,5 +94,5 @@ void					ft_threads_create(pthread_t *observer, t_table *table);
 
 void					ft_message(t_philo *philosopher, char *str);
 void					ft_table_destroy(t_table **table);
-void	ft_threads_wait(pthread_t *observer,t_table *table);
+void					ft_threads_wait(pthread_t *observer, t_table *table);
 #endif
