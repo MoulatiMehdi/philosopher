@@ -21,7 +21,7 @@ bool	ft_observer_dead(t_table *table)
 	{
 		if (ft_philo_isdead(table->philosophers[i]))
 		{
-			ft_message(table->philosophers[i], "\033[1;91mis dead\033[0m");
+			ft_message(table->philosophers[i], "\033[1;91mdied\033[0m");
 			return (true);
 		}
 		i++;

@@ -1,0 +1,152 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "-o",
+      "actions.o",
+      "actions.c"
+    ],
+    "directory": "/home/mehdi/philosopher/philo",
+    "file": "/home/mehdi/philosopher/philo/actions.c",
+    "output": "/home/mehdi/philosopher/philo/actions.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "-o",
+      "forks.o",
+      "forks.c"
+    ],
+    "directory": "/home/mehdi/philosopher/philo",
+    "file": "/home/mehdi/philosopher/philo/forks.c",
+    "output": "/home/mehdi/philosopher/philo/forks.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "-o",
+      "main.o",
+      "main.c"
+    ],
+    "directory": "/home/mehdi/philosopher/philo",
+    "file": "/home/mehdi/philosopher/philo/main.c",
+    "output": "/home/mehdi/philosopher/philo/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "-o",
+      "mutex.o",
+      "mutex.c"
+    ],
+    "directory": "/home/mehdi/philosopher/philo",
+    "file": "/home/mehdi/philosopher/philo/mutex.c",
+    "output": "/home/mehdi/philosopher/philo/mutex.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "-o",
+      "observer.o",
+      "observer.c"
+    ],
+    "directory": "/home/mehdi/philosopher/philo",
+    "file": "/home/mehdi/philosopher/philo/observer.c",
+    "output": "/home/mehdi/philosopher/philo/observer.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "-o",
+      "philosopher.o",
+      "philosopher.c"
+    ],
+    "directory": "/home/mehdi/philosopher/philo",
+    "file": "/home/mehdi/philosopher/philo/philosopher.c",
+    "output": "/home/mehdi/philosopher/philo/philosopher.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "-o",
+      "philosophers.o",
+      "philosophers.c"
+    ],
+    "directory": "/home/mehdi/philosopher/philo",
+    "file": "/home/mehdi/philosopher/philo/philosophers.c",
+    "output": "/home/mehdi/philosopher/philo/philosophers.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "-o",
+      "table.o",
+      "table.c"
+    ],
+    "directory": "/home/mehdi/philosopher/philo",
+    "file": "/home/mehdi/philosopher/philo/table.c",
+    "output": "/home/mehdi/philosopher/philo/table.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "-o",
+      "thread.o",
+      "thread.c"
+    ],
+    "directory": "/home/mehdi/philosopher/philo",
+    "file": "/home/mehdi/philosopher/philo/thread.c",
+    "output": "/home/mehdi/philosopher/philo/thread.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-c",
+      "-o",
+      "time.o",
+      "time.c"
+    ],
+    "directory": "/home/mehdi/philosopher/philo",
+    "file": "/home/mehdi/philosopher/philo/time.c",
+    "output": "/home/mehdi/philosopher/philo/time.o"
+  }
+]
