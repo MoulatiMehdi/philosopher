@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 19:56:18 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/15 21:00:59 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:59:02 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_table	*ft_table_new(int argc, char **argv)
 	table->forks = ft_forks_new(table->size);
 	table->meals = ft_forks_new(table->size);
 	table->lock_dead = ft_mutex_new();
-	table->lock_write = ft_mutex_new();
 	table->eat_check = argc == 6;
 	if (argc == 6)
 		table->min_eat = atol(argv[5]);

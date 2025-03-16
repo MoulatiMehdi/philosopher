@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:24:28 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/15 21:04:08 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/16 16:57:01 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	ft_observer_dead(t_table *table)
 	{
 		if (ft_philo_isdead(table->philosophers[i]))
 		{
-			ft_message(table->philosophers[i], "\033[1;91mdied\033[0m");
+			ft_message(table->philosophers[i], "died");
 			return (true);
 		}
 		i++;

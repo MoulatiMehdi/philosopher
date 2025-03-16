@@ -35,40 +35,6 @@ t_mutex	**ft_forks_new(size_t n)
 	return (forks);
 }
 
-void	ft_forks_take(t_philo *philosopher)
-{
-	t_mutex	*mutex_l;
-	t_mutex	*mutex_r;
-
-	mutex_l = philosopher->fork_left;
-	mutex_r = philosopher->fork_right;
-	if (philosopher->id % 2 == 0)
-	{
-		mutex_l = philosopher->fork_right;
-		mutex_r = philosopher->fork_left;
-	}
-	pthread_mutex_lock(mutex_l);
-	ft_message(philosopher, "has taken a fork");
-	pthread_mutex_lock(mutex_r);
-	ft_message(philosopher, "has taken a fork");
-}
-
-void	ft_forks_put(t_philo *philosopher)
-{
-	t_mutex	*mutex_l;
-	t_mutex	*mutex_r;
-
-	mutex_l = philosopher->fork_left;
-	mutex_r = philosopher->fork_right;
-	if (philosopher->id % 2 != 0)
-	{
-		mutex_l = philosopher->fork_right;
-		mutex_r = philosopher->fork_left;
-	}
-	pthread_mutex_unlock(mutex_l);
-	pthread_mutex_unlock(mutex_r);
-}
-
 void	ft_forks_destroy(t_mutex ***forks)
 {
 	size_t	i;

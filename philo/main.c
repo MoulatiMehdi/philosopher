@@ -21,6 +21,8 @@ void	*func(void *arg)
 	t_philo	*philosopher;
 
 	philosopher = arg;
+	if (philosopher->id % 2 == 0)
+		usleep(500);
 	philosopher->last_meal = ft_timestamp();
 	while (1)
 	{

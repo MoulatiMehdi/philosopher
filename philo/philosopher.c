@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 19:46:06 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/15 20:54:51 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:29:52 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	ft_philo_isdead(t_philo *philo)
 		ans = false;
 	else
 	{
-		ans = (ft_timestamp() - philo->last_meal >= philo->time_die * 1000)
+		ans = ((ft_timestamp() - philo->last_meal) / 1000 > philo->time_die)
 			&& !philo->iseating;
 	}
 	pthread_mutex_unlock(philo->meal_check);

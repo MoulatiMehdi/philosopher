@@ -11,7 +11,7 @@ OBJS = $(SRCS:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJS) 
-	$(CC) $(CCFLAGS) $^ -o $@ -lc
+	$(CC) $(CCFLAGS) $^ -o $@ -lc -pthread
 
 %.o : %.c 
 	$(CC) $(CCFLAGS) -c $< -o $@
