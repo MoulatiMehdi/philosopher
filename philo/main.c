@@ -32,8 +32,9 @@ void	*func(void *arg)
 		}
 		pthread_mutex_unlock(philosopher->lock_dead);
 		ft_philo_eat(philosopher);
-		ft_philo_sleep(philosopher);
-		ft_philo_think(philosopher);
+	    ft_message(philosopher, "is sleeping");
+	    ft_msleep(philosopher->time_sleep);
+	    ft_message(philosopher, "is thinking");
 	}
 	return (NULL);
 }
@@ -51,8 +52,7 @@ int	main(int argc, char **argv)
 	}
 	table = ft_table_new(argc, argv);
 	ft_threads_create(&observer, table);
-	ft_threads_join(&observer, table);
-	ft_threads_detach(table);
+	ft_threads_wait(&observer, table);
 	ft_table_destroy(&table);
 	return (0);
 }

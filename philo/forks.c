@@ -42,7 +42,7 @@ void	ft_forks_take(t_philo *philosopher)
 
 	mutex_l = philosopher->fork_left;
 	mutex_r = philosopher->fork_right;
-	if (philosopher->id % 2 != 0)
+	if (philosopher->id % 2 == 0)
 	{
 		mutex_l = philosopher->fork_right;
 		mutex_r = philosopher->fork_left;

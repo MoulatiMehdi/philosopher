@@ -15,15 +15,15 @@
 
 void	ft_table_philosophers(t_table *table)
 {
-	long	i;
-	long	n;
+	size_t	i;
+	size_t	n;
 
 	n = table->size;
 	i = 0;
 	while (i < n)
 	{
 		table->philosophers[i]->fork_left = table->forks[i];
-		table->philosophers[i]->fork_right = table->forks[(i + 1) % n];
+		table->philosophers[i]->fork_right = table->forks[(n + i - 1) % n];
 		table->philosophers[i]->meal_check = table->meals[i];
 		table->philosophers[i]->lock_dead = table->lock_dead;
 		table->philosophers[i]->min_eat = table->min_eat;
@@ -53,6 +53,7 @@ t_table	*ft_table_new(int argc, char **argv)
 	table->forks = ft_forks_new(table->size);
 	table->meals = ft_forks_new(table->size);
 	table->lock_dead = ft_mutex_new();
+	table->lock_write = ft_mutex_new();
 	table->eat_check = argc == 6;
 	if (argc == 6)
 		table->min_eat = atol(argv[5]);

@@ -12,27 +12,15 @@
 
 #include "philosopher.h"
 
-void	ft_threads_detach(t_table *table)
+void	ft_threads_wait(pthread_t *observer,t_table *table)
 {
 	size_t	i;
 
 	i = 0;
+	pthread_join(*observer, NULL);
 	while (i < table->size)
 	{
 		pthread_detach(table->philosophers[i]->thread);
-		i++;
-	}
-}
-
-void	ft_threads_join(pthread_t *observer, t_table *table)
-{
-	size_t	i;
-
-	pthread_join(*observer, NULL);
-	i = 0;
-	while (i < table->size)
-	{
-		pthread_join(table->philosophers[i]->thread, NULL);
 		i++;
 	}
 }

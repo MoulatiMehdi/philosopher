@@ -47,8 +47,8 @@ bool	ft_philo_isdead(t_philo *philo)
 		ans = false;
 	else
 	{
-		ans = (ft_timestamp() - philo->last_meal > philo->time_die)
-			&& philo->state != EATING;
+		ans = (ft_timestamp() - philo->last_meal >= philo->time_die * 1000)
+			&& !philo->iseating;
 	}
 	pthread_mutex_unlock(philo->meal_check);
 	return (ans);

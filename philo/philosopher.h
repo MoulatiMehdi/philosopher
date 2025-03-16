@@ -26,14 +26,6 @@
 
 typedef pthread_mutex_t	t_mutex;
 
-typedef enum e_action
-{
-	EATING,
-	THINKING,
-	SLEEPING,
-	DYING,
-}						t_state;
-
 typedef struct s_philo
 {
 	bool				*stop;
@@ -44,7 +36,7 @@ typedef struct s_philo
 	size_t				time_sleep;
 	size_t				time_eat;
 	size_t				time_die;
-	t_state				state;
+	bool				iseating;
 	t_mutex				*fork_left;
 	t_mutex				*fork_right;
 	t_mutex				*meal_check;
@@ -65,6 +57,7 @@ typedef struct s_table
 	t_mutex				**forks;
 	t_mutex				**meals;
 	t_mutex				*lock_dead;
+	t_mutex				*lock_write;
 }						t_table;
 
 size_t					ft_timestamp(void);
@@ -97,10 +90,9 @@ void					ft_philo_die(t_philo *philosopher);
 void					*ft_observer_should_stop(void *table);
 void					*func(void *arg);
 
-void					ft_threads_detach(t_table *table);
-void					ft_threads_join(pthread_t *observer, t_table *table);
 void					ft_threads_create(pthread_t *observer, t_table *table);
 
 void					ft_message(t_philo *philosopher, char *str);
 void					ft_table_destroy(t_table **table);
+void	ft_threads_wait(pthread_t *observer,t_table *table);
 #endif

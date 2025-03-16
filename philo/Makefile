@@ -4,7 +4,7 @@ CC = cc
 CCFLAGS = -Wall -Wextra -g #-fsanitize=address
 
 
-NAME = philosopher 
+NAME = philo 
 SRCS = $(wildcard *.c) 
 OBJS = $(SRCS:.c=.o)
 

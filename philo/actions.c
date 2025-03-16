@@ -17,41 +17,28 @@ void	ft_message(t_philo *philosopher, char *str)
 {
 	pthread_mutex_lock(philosopher->lock_dead);
 	if (*philosopher->stop == false)
-		printf("%ld %ld %s\n", ft_timestamp(), philosopher->id, str);
+		printf("%ld %ld %s\n", ft_timestamp()/1000, philosopher->id, str);
 	pthread_mutex_unlock(philosopher->lock_dead);
 }
 
 void	ft_philo_eat(t_philo *philosopher)
 {
-	ft_forks_take(philosopher);
-	pthread_mutex_lock(philosopher->meal_check);
-	philosopher->last_meal = ft_timestamp();
+	pthread_mutex_lock(philosopher->fork_right);
+	ft_message(philosopher, "has taken a fork");
+	pthread_mutex_lock(philosopher->fork_left);
+    ft_message(philosopher, "has taken a fork");
+
+    philosopher->iseating = true;
 	ft_message(philosopher, "is eating");
-	philosopher->state = EATING;
+    pthread_mutex_lock(philosopher->meal_check);
+	philosopher->last_meal = ft_timestamp();
 	philosopher->eaten++;
 	pthread_mutex_unlock(philosopher->meal_check);
-	ft_msleep(philosopher->time_eat);
-	pthread_mutex_lock(philosopher->meal_check);
-	philosopher->last_meal = ft_timestamp();
-	pthread_mutex_unlock(philosopher->meal_check);
-	ft_forks_put(philosopher);
+
+    ft_msleep(philosopher->time_eat);
+	philosopher->iseating = false;
+	
+    pthread_mutex_unlock(philosopher->fork_right);
+	pthread_mutex_unlock(philosopher->fork_left);
 }
 
-void	ft_philo_sleep(t_philo *philosopher)
-{
-	philosopher->state = SLEEPING;
-	ft_message(philosopher, "is sleeping");
-	ft_msleep(philosopher->time_sleep);
-}
-
-void	ft_philo_think(t_philo *philosopher)
-{
-	philosopher->state = THINKING;
-	ft_message(philosopher, "is thinking");
-}
-
-void	ft_philo_die(t_philo *philosopher)
-{
-	philosopher->state = DYING;
-	ft_message(philosopher, "\033[1;91mis dead\033[0m");
-}
