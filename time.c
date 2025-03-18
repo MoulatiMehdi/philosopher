@@ -8,9 +8,8 @@ long	ft_timestamp(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void ft_msleep(long ms)
+void	ft_msleep(long ms)
 {
-
 	long	curr;
 
 	curr = ft_timestamp();
