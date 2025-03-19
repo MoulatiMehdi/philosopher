@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:59:06 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/18 23:59:06 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:36:50 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,10 @@ void	ft_philo_init(t_philo *philo, t_fork **forks, t_args *args)
 	philo->args = args;
 	philo->meal_last = 0;
 	philo->meal_count = 0;
-	philo->is_ltaken = 0;
-	philo->is_rtaken = 0;
 	philo->fork_right = &(*forks)[philo->id];
 	philo->fork_left = &(*forks)[(philo->id + 1) % args->size];
-	philo->fork_right->used = 0;
 	pthread_mutex_init(&philo->lock_meal, NULL);
-	pthread_mutex_init(&philo->fork_right->lock, NULL);
+	pthread_mutex_init(philo->fork_right, NULL);
 }
 
 int	ft_philos_init(t_philo **philos, t_fork **forks, t_args *args)

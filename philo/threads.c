@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:59:18 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/19 12:50:27 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/19 20:07:44 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	ft_threads_start(t_philo **philos, t_args *args)
 {
-	int			i;
+	int	i;
 
 	args->time_start = ft_timestamp();
 	i = 0;
 	while (i < args->size)
 	{
 		if (pthread_create(&(*philos)[i].thread, NULL, ft_thread_philo,
-				&(*philos)[i]))
+			&(*philos)[i]))
 			return (0);
 		i++;
 	}

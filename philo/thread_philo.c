@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:59:11 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/19 00:23:38 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/19 20:05:33 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_philo_isdead(t_philo *philo)
 	return (isdead);
 }
 
-void	ft_philo_logs(t_philo *philo, char *str)
+void	*ft_philo_logs(t_philo *philo, char *str)
 {
 	long	curr;
 
@@ -31,30 +31,26 @@ void	ft_philo_logs(t_philo *philo, char *str)
 	if (!ft_philo_isdead(philo))
 		printf("%013ld %d %s\n", curr, philo->id + 1, str);
 	pthread_mutex_unlock(&philo->args->lock_write);
+	return (NULL);
 }
 
 void	ft_philo_fork_take(char c, t_philo *philo)
 {
-	int		*taken;
 	t_fork	*fork;
 
 	if (ft_philo_isdead(philo))
 		return ;
-	taken = &philo->is_rtaken;
 	fork = philo->fork_right;
 	if (c == 'l')
-	{
-		taken = &philo->is_ltaken;
 		fork = philo->fork_left;
-	}
-	pthread_mutex_lock(&fork->lock);
+	pthread_mutex_lock(fork);
 	ft_philo_logs(philo, "has taken a fork");
 }
 
 void	ft_philo_forks_put(t_philo *philo)
 {
-	pthread_mutex_unlock(&philo->fork_right->lock);
-	pthread_mutex_unlock(&philo->fork_left->lock);
+	pthread_mutex_unlock(philo->fork_right);
+	pthread_mutex_unlock(philo->fork_left);
 	ft_philo_logs(philo, "is sleeping");
 	ft_msleep(philo->args->time_sleep);
 	ft_philo_logs(philo, "is thinking");
@@ -65,6 +61,8 @@ void	*ft_thread_philo(void *arg)
 	t_philo	*philo;
 
 	philo = arg;
+	if (philo->args->size == 1)
+		return (ft_philo_logs(philo, "has taken a fork"));
 	if (philo->id % 2 != 0)
 		ft_msleep(philo->args->time_eat);
 	while (!ft_philo_isdead(philo))

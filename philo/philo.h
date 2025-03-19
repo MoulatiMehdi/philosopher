@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 00:00:04 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/19 00:00:05 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:35:05 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define PHILO_MAX 300
 
 typedef pthread_mutex_t	t_mutex;
+typedef pthread_mutex_t	t_fork;
 
 typedef struct s_args
 {
@@ -37,12 +38,6 @@ typedef struct s_args
 	t_mutex				lock_death;
 	pthread_t			monitor;
 }						t_args;
-
-typedef struct s_fork
-{
-	int					used;
-	t_mutex				lock;
-}						t_fork;
 
 typedef struct s_philo
 {
