@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:59:08 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/18 23:59:08 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:17:43 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_monitor_philo(t_philo *philo, long time_curr)
 	pthread_mutex_lock(&philo->lock_meal);
 	last_meal = time_curr - philo->meal_last;
 	pthread_mutex_unlock(&philo->lock_meal);
-	if (last_meal >= args->time_die)
+	if (last_meal > args->time_die)
 	{
 		pthread_mutex_lock(&args->lock_write);
 		pthread_mutex_lock(&args->lock_death);

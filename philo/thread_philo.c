@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:59:11 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/18 23:59:11 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:23:38 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,12 @@ void	ft_philo_fork_take(char c, t_philo *philo)
 		fork = philo->fork_left;
 	}
 	pthread_mutex_lock(&fork->lock);
-	if (!(*taken) && !fork->used)
-	{
-		*taken = 1;
-		fork->used = 1;
-		pthread_mutex_unlock(&fork->lock);
-		ft_philo_logs(philo, "has taken a fork");
-	}
-	else
-		pthread_mutex_unlock(&fork->lock);
+	ft_philo_logs(philo, "has taken a fork");
 }
 
 void	ft_philo_forks_put(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->fork_right->lock);
-	philo->is_rtaken = 0;
-	philo->fork_right->used = 0;
 	pthread_mutex_unlock(&philo->fork_right->lock);
-	pthread_mutex_lock(&philo->fork_left->lock);
-	philo->is_ltaken = 0;
-	philo->fork_left->used = 0;
 	pthread_mutex_unlock(&philo->fork_left->lock);
 	ft_philo_logs(philo, "is sleeping");
 	ft_msleep(philo->args->time_sleep);
