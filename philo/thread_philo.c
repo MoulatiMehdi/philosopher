@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   thread_philo.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/18 23:59:11 by mmoulati          #+#    #+#             */
+/*   Updated: 2025/03/18 23:59:11 by mmoulati         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
-#include <pthread.h>
 
 int	ft_philo_isdead(t_philo *philo)
 {
@@ -76,18 +87,14 @@ void	*ft_thread_philo(void *arg)
 			&& philo->args->meal_min > 0)
 			break ;
 		ft_philo_fork_take('l', philo);
-		if (philo->is_ltaken)
-			ft_philo_fork_take('r', philo);
-		if (philo->is_rtaken && philo->is_ltaken)
-		{
-			pthread_mutex_lock(&philo->lock_meal);
-			philo->meal_last = ft_timestamp() - philo->args->time_start;
-			pthread_mutex_unlock(&philo->lock_meal);
-			ft_philo_logs(philo, "is eating");
-			ft_msleep(philo->args->time_eat);
-			philo->meal_count++;
-			ft_philo_forks_put(philo);
-		}
+		ft_philo_fork_take('r', philo);
+		pthread_mutex_lock(&philo->lock_meal);
+		philo->meal_last = ft_timestamp() - philo->args->time_start;
+		pthread_mutex_unlock(&philo->lock_meal);
+		ft_philo_logs(philo, "is eating");
+		ft_msleep(philo->args->time_eat);
+		philo->meal_count++;
+		ft_philo_forks_put(philo);
 	}
 	return (NULL);
 }
