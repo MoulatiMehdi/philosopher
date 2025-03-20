@@ -1,10 +1,10 @@
 CC = cc 
-CCFLAGS = -Wall -Wextra -Werror -fsanitize=thread
+CCFLAGS = -Wall -Wextra -Werror
 
 SRCS = args.c  main.c  philo.c  process.c  process_philo.c  thread.c  time.c
 OBJS = $(SRCS:%.c=%.o) 
 
-NAME = philo
+NAME = philo_bonus
 
 all : $(NAME)
 
