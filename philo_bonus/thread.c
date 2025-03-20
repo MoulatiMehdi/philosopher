@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_monitor.c                                   :+:      :+:    :+:   */
+/*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -33,8 +33,8 @@ void	*ft_thread_monitor(void *arg)
 			printf("%013ld %d died\n", time_curr, philo->id + 1);
 			sem_post(args->lock_death);
 		}
-        usleep(1000);
-    }
+		usleep(1000);
+	}
 	return (NULL);
 }
 

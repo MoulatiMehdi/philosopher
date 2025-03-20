@@ -6,11 +6,12 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:58:59 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/18 23:59:03 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:30:09 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdio.h>
 
 int	main(int argc, char *argv[])
 {

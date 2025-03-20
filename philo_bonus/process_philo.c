@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_philo.c                                     :+:      :+:    :+:   */
+/*   process_philo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -59,8 +59,9 @@ void	*ft_process_philo(t_philo *philo)
 		ft_msleep(philo->args->time_eat);
 		philo->meal_count++;
 		ft_philo_forks_put(philo);
-        ft_msleep(philo->args->time_die - philo->args->time_eat - philo->args->time_sleep - 60);
-    }
+		ft_msleep(philo->args->time_die - philo->args->time_eat
+			- philo->args->time_sleep - 30);
+	}
 	sem_post(philo->args->lock_death);
 	return (NULL);
 }

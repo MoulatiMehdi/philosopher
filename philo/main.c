@@ -22,13 +22,13 @@ int	ft_args_init(t_args *args, int argc, char **argv)
 	}
 	args->meal_min = -1;
 	args->is_dead = 0;
-	args->size = atoi(argv[1]);
-	args->time_die = atoi(argv[2]);
-	args->time_eat = atoi(argv[3]);
-	args->time_sleep = atoi(argv[4]);
+	args->size = ft_atoi(argv[1]);
+	args->time_die = ft_atoi(argv[2]);
+	args->time_eat = ft_atoi(argv[3]);
+	args->time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 	{
-		args->meal_min = atoi(argv[5]);
+		args->meal_min = ft_atoi(argv[5]);
 		if (args->meal_min < 0)
 			return (0);
 	}

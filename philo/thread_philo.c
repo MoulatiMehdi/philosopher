@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:59:11 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/19 20:05:33 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:09:12 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	*ft_thread_philo(void *arg)
 		ft_msleep(philo->args->time_eat);
 		philo->meal_count++;
 		ft_philo_forks_put(philo);
+		ft_msleep(philo->args->time_die - philo->args->time_eat
+			- philo->args->time_sleep - 30);
 	}
 	return (NULL);
 }

@@ -1,7 +1,7 @@
 CC = cc 
 CCFLAGS = -Wall -Wextra -Werror
 
-SRCS = args.c  main.c  philo.c  process.c  process_philo.c  thread.c  time.c
+SRCS = args.c  main.c  philo.c  process.c  process_philo.c  thread.c  time.c ft_atoi.c
 OBJS = $(SRCS:%.c=%.o) 
 
 NAME = philo_bonus

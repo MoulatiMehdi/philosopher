@@ -1,7 +1,7 @@
 CC = cc 
 CCFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c  philo.c  thread_monitor.c  thread_philo.c  threads.c  time.c
+SRCS = main.c  philo.c  thread_monitor.c  thread_philo.c  threads.c  time.c ft_atoi.c
 
 OBJS = $(SRCS:%.c=%.o) 
 

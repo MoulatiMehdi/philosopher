@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 00:00:04 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/19 13:35:05 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:46:58 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ typedef struct s_args
 typedef struct s_philo
 {
 	int					id;
-	int					is_ltaken;
-	int					is_rtaken;
 	long				meal_last;
 	int					meal_count;
 	t_mutex				lock_meal;
@@ -68,4 +66,5 @@ int						ft_threads_wait(t_philo **philo, t_args *args);
 void					*ft_thread_philo(void *arg);
 void					*ft_thread_monitor(void *arg);
 
+long					ft_atoi(const char *str);
 #endif // !PHILO_H

@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 00:00:04 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/19 21:21:37 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:07:56 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 # define PHILO_H
 
-# include "unistd.h"
 # include <fcntl.h>
 # include <pthread.h>
-# include <semaphore.h>
 # include <semaphore.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <sys/wait.h>
+# include <unistd.h>
 
 # define PHILO_MAX 300
 # define SEM_FORK "/sem_fork"
@@ -72,4 +71,5 @@ int						ft_args_init(t_args *args, int argc, char **argv);
 void					*ft_philo_kill(void *arg);
 
 void					*ft_thread_philos_kill(void *arg);
-#endif // !PHILO_H
+long					ft_atoi(const char *str);
+#endif

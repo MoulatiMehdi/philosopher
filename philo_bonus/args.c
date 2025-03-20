@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   args.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 14:05:31 by mmoulati          #+#    #+#             */
+/*   Updated: 2025/03/20 20:05:15 by mmoulati         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_args_semaphore_init(t_args *args)
@@ -24,13 +36,13 @@ int	ft_args_init(t_args *args, int argc, char **argv)
 		return (0);
 	}
 	args->meal_min = -1;
-	args->size = atoi(argv[1]);
-	args->time_die = atoi(argv[2]);
-	args->time_eat = atoi(argv[3]);
-	args->time_sleep = atoi(argv[4]);
+	args->size = ft_atoi(argv[1]);
+	args->time_die = ft_atoi(argv[2]);
+	args->time_eat = ft_atoi(argv[3]);
+	args->time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 	{
-		args->meal_min = atoi(argv[5]);
+		args->meal_min = ft_atoi(argv[5]);
 		if (args->meal_min < 0)
 			return (0);
 	}
