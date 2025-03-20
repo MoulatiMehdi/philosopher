@@ -15,7 +15,9 @@
 # define PHILO_H
 
 # include "unistd.h"
+# include <fcntl.h>
 # include <pthread.h>
+# include <semaphore.h>
 # include <semaphore.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -23,6 +25,10 @@
 # include <sys/wait.h>
 
 # define PHILO_MAX 300
+# define SEM_FORK "/sem_fork"
+# define SEM_END "/sem_end"
+# define SEM_WRITE "/sem_write"
+# define SEM_MEAL "/sem_write"
 
 typedef pthread_mutex_t	t_fork;
 
@@ -34,11 +40,10 @@ typedef struct s_args
 	int					meal_min;
 	int					time_sleep;
 	long				time_start;
-	int					is_dead;
 	sem_t				*lock_forks;
 	sem_t				*lock_write;
 	sem_t				*lock_death;
-	pthread_t			monitor;
+	pthread_t			death;
 }						t_args;
 
 typedef struct s_philo
@@ -47,23 +52,24 @@ typedef struct s_philo
 	int					meal_count;
 	long				meal_last;
 	t_args				*args;
-	sem_t				lock_meal;
+	sem_t				*lock_meal;
 	pid_t				pid;
 }						t_philo;
 
-int						ft_philos_init(t_philo **philos, t_fork **forks,
-							t_args *args);
-
-void					ft_free_memory(t_philo *philo, t_fork *fork);
+int						ft_philos_init(t_philo **philos, t_args *args);
+void					ft_philos_destroy(t_philo *philos, t_args *args);
 
 void					ft_msleep(long miliseconds);
 long					ft_timestamp(void);
 
-int						ft_threads_stop(t_args *args);
-int						ft_threads_start(t_philo **philo, t_args *args);
-int						ft_threads_wait(t_philo **philo, t_args *args);
+int						ft_process_stop(t_philo **philos, t_args *args);
+int						ft_process_start(t_philo **philo, t_args *args);
+int						ft_process_wait(t_philo **philo, t_args *args);
 
-void					*ft_thread_philo(void *arg);
+void					*ft_process_philo(t_philo *philo);
 void					*ft_thread_monitor(void *arg);
+int						ft_args_init(t_args *args, int argc, char **argv);
+void					*ft_philo_kill(void *arg);
 
+void					*ft_thread_philos_kill(void *arg);
 #endif // !PHILO_H
