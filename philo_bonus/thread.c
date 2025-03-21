@@ -33,18 +33,18 @@ void	*ft_thread_monitor(void *arg)
 			printf("%013ld %d died\n", time_curr, philo->id + 1);
 			sem_post(args->lock_death);
 		}
-		usleep(1000);
+		ft_msleep(1);
 	}
 	return (NULL);
 }
 
 void	*ft_thread_philos_kill(void *arg)
 {
-	t_philo	**philos;
+	t_philo	*philos;
 	t_args	*args;
 
 	philos = arg;
-	args = philos[0]->args;
+	args = philos[0].args;
 	sem_wait(args->lock_death);
 	ft_process_stop(philos, args);
 	return (NULL);

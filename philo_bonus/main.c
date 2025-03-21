@@ -16,15 +16,15 @@
 int	main(int argc, char *argv[])
 {
 	t_args	args;
-	t_philo	*philos;
+	t_philo	philos[PHILO_MAX];
 
 	if (!ft_args_init(&args, argc, argv))
 		return (EXIT_FAILURE);
-	if (!ft_philos_init(&philos, &args))
+	if (!ft_philos_init(philos, &args))
 		return (EXIT_FAILURE);
-	if (!ft_process_start(&philos, &args))
-		ft_process_stop(&philos, &args);
-	ft_process_wait(&philos, &args);
+	if (!ft_process_start(philos, &args))
+		ft_process_stop(philos, &args);
+	ft_process_wait(philos, &args);
 	ft_philos_destroy(philos, &args);
 	return (EXIT_SUCCESS);
 }

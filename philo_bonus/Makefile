@@ -1,5 +1,5 @@
 CC = cc 
-CCFLAGS = -Wall -Wextra -Werror
+CCFLAGS = -Wall -Wextra -Werror 
 
 SRCS = args.c  main.c  philo.c  process.c  process_philo.c  thread.c  time.c ft_atoi.c
 OBJS = $(SRCS:%.c=%.o) 

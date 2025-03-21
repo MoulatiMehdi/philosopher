@@ -36,6 +36,8 @@ static void	ft_philo_forks_put(t_philo *philo)
 	ft_philo_logs(philo, "is sleeping");
 	ft_msleep(philo->args->time_sleep);
 	ft_philo_logs(philo, "is thinking");
+	ft_msleep(philo->args->time_die - philo->args->time_eat
+		- philo->args->time_sleep - 10);
 }
 
 void	*ft_process_philo(t_philo *philo)
@@ -59,9 +61,8 @@ void	*ft_process_philo(t_philo *philo)
 		ft_msleep(philo->args->time_eat);
 		philo->meal_count++;
 		ft_philo_forks_put(philo);
-		ft_msleep(philo->args->time_die - philo->args->time_eat
-			- philo->args->time_sleep - 30);
 	}
+	ft_msleep(20);
 	sem_post(philo->args->lock_death);
 	return (NULL);
 }
