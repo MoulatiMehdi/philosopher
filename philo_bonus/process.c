@@ -6,14 +6,14 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:04:44 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/20 14:04:46 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/21 21:14:36 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <pthread.h>
 
-int	ft_process_start(t_philo philos[], t_args *args)
+int	ft_process_start(t_philo **philos, t_args *args)
 {
 	int		i;
 	t_philo	*philo;
@@ -22,7 +22,7 @@ int	ft_process_start(t_philo philos[], t_args *args)
 	i = 0;
 	while (i < args->size)
 	{
-		philo = &(philos)[i];
+		philo = &(*philos)[i];
 		philo->pid = fork();
 		if (philo->pid < 0)
 			return (0);
@@ -38,7 +38,7 @@ int	ft_process_start(t_philo philos[], t_args *args)
 	return (1);
 }
 
-int	ft_process_wait(t_philo philo[], t_args *args)
+int	ft_process_wait(t_philo **philo, t_args *args)
 {
 	int	i;
 	int	status;
@@ -48,21 +48,21 @@ int	ft_process_wait(t_philo philo[], t_args *args)
 	pthread_join(args->death, NULL);
 	while (i < args->size)
 	{
-		if (waitpid((philo)[i].pid, NULL, 0) == -1)
+		if (waitpid((*philo)[i].pid, NULL, 0) == -1)
 			status = 0;
 		i++;
 	}
 	return (status);
 }
 
-int	ft_process_stop(t_philo philos[], t_args *args)
+int	ft_process_stop(t_philo **philos, t_args *args)
 {
 	int	curr;
 
 	curr = 0;
 	while (curr < args->size)
 	{
-		kill((philos)[curr].pid, SIGKILL);
+		kill((*philos)[curr].pid, SIGKILL);
 		curr++;
 	}
 	return (1);

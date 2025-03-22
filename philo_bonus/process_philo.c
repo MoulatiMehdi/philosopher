@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:59:11 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/19 20:05:33 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/21 21:11:02 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ static void	ft_philo_forks_put(t_philo *philo)
 	ft_philo_logs(philo, "is sleeping");
 	ft_msleep(philo->args->time_sleep);
 	ft_philo_logs(philo, "is thinking");
-	ft_msleep(philo->args->time_die - philo->args->time_eat
-		- philo->args->time_sleep - 10);
+	if (philo->meal_count < philo->args->meal_min)
+		ft_msleep(philo->args->time_die - philo->args->time_eat
+			- philo->args->time_sleep - 10);
 }
 
 void	*ft_process_philo(t_philo *philo)
@@ -62,7 +63,7 @@ void	*ft_process_philo(t_philo *philo)
 		philo->meal_count++;
 		ft_philo_forks_put(philo);
 	}
-	ft_msleep(20);
+	ft_msleep(1);
 	sem_post(philo->args->lock_death);
 	return (NULL);
 }

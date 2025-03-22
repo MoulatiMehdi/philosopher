@@ -6,7 +6,7 @@
 /*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:05:31 by mmoulati          #+#    #+#             */
-/*   Updated: 2025/03/20 20:05:15 by mmoulati         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:12:42 by mmoulati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_args_semaphore_init(t_args *args)
 	args->lock_death = sem_open(SEM_END, O_CREAT, 0644, 1);
 	args->lock_write = sem_open(SEM_WRITE, O_CREAT, 0644, 1);
 	args->lock_forks = sem_open(SEM_FORK, O_CREAT, 0644, args->size);
+	sem_unlink(SEM_FORK);
 	sem_unlink(SEM_END);
-	sem_unlink(SEM_WRITE);
 	sem_unlink(SEM_WRITE);
 	sem_wait(args->lock_death);
 	return (0);
