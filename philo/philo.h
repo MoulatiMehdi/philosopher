@@ -14,44 +14,76 @@
 
 # define PHILO_H
 
-# include "unistd.h"
+# include <unistd.h>
+# include <limits.h>
+
 # include <pthread.h>
+# include <signal.h>
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
 
-# define PHILO_MAX 200
+# define PHILO_MAX  200
+# define MSG_THINK  "is thinking"
+# define MSG_SLEEP  "is sleeping"
+# define MSG_EAT    "is eating"
+# define MSG_DIE    "die"
+# define MSG_FORK   "has taken a fork"
 
-typedef pthread_mutex_t	t_mutex;
-typedef pthread_mutex_t	t_fork;
+
+typedef struct timeval t_time; 
+
+typedef struct s_mutex 
+{
+    long value;
+    pthread_mutex_t lock;
+} t_mutex;
 
 typedef struct s_data
 {
-    int					size;
-    int					time_eat;
-    int					time_die;
-    int					time_sleep;
+    long					size;
+    long					time_eat;
+    long					time_die;
+    long					time_sleep;
     long				time_start;
-    int					is_dead;
-    int					meal_min;
-    t_mutex				lock_write;
-    t_mutex				lock_death;
+    long				meal_min;
+    t_mutex				death;
+    t_mutex		write;
     pthread_t			monitor;
 }						t_data;
 
 typedef struct s_philo
 {
-    int					id;
-    int					meal_count;
-    long				meal_last;
-    t_mutex				lock_meal;
-    t_fork				*fork_r;
-    t_fork				*fork_l;
-    t_data				*data ;
+    long					id;
+    long				count;
     pthread_t			thread;
+    t_data				*data;
+    t_mutex				meal;
+    t_mutex				*fork_r;
+    t_mutex				*fork_l;
 }						t_philo;
 
 
-long					ft_atoi(const char *str);
-int ft_threads_create(t_data * data,t_fork * forks);
+
+void ft_threads_simulation(t_philo *philos,t_data * data);
+
+long ft_mutex_get(t_mutex * mutex);
+void ft_mutex_set(t_mutex * mutex,long value);
+void ft_mutex_add(t_mutex * mutex,long value);
+void ft_mutex_init(t_mutex * mutex,long value);
+void ft_mutex_destroy(t_mutex * mutex);
+
+
+void ft_time_set(long * usec);
+void ft_time_log(t_philo * philo,char * str);
+void ft_time_sleep(t_philo * philo,long miliseconds);
+void ft_message(t_philo * philo,char * str);
+
+
+int ft_data_init(t_data * data,int argc,char ** argv);
+
+
+void ft_philo_eat(t_philo * philo);
+void ft_philo_sleep(t_philo * philo);
 #endif // !PHILO_H
