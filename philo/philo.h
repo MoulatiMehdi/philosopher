@@ -58,7 +58,7 @@ int						ft_philos_init(t_philo **philos, t_fork **forks,
 
 void					ft_free_memory(t_philo *philo, t_fork *fork);
 
-void					ft_msleep(long miliseconds);
+void	ft_msleep(t_philo * philo,long ms);
 long					ft_timestamp(void);
 
 int						ft_threads_stop(t_args *args);

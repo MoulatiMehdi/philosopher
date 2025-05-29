@@ -18,10 +18,18 @@ void	ft_philo_init(t_philo *philo, t_fork **forks, t_args *args)
 	philo->args = args;
 	philo->meal_last = 0;
 	philo->meal_count = 0;
-	philo->fork_right = &(*forks)[philo->id];
-	philo->fork_left = &(*forks)[(philo->id + 1) % args->size];
-	pthread_mutex_init(&philo->lock_meal, NULL);
-	pthread_mutex_init(philo->fork_right, NULL);
+    if(philo->id % 2 == 0)
+    { 
+        philo->fork_right = &(*forks)[philo->id];
+        philo->fork_left = &(*forks)[(philo->id + 1) % args->size];
+    }
+    else 
+    {
+        philo->fork_right = &(*forks)[(philo->id + 1) % args->size];
+        philo->fork_left = &(*forks)[philo->id];    
+    }
+    pthread_mutex_init(&philo->lock_meal, NULL);
+    pthread_mutex_init(philo->fork_right, NULL);
 }
 
 int	ft_philos_init(t_philo **philos, t_fork **forks, t_args *args)
