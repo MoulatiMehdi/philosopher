@@ -38,22 +38,48 @@ int	ft_monitor_philo(t_philo *philo, long time_curr)
 	return (is_dead);
 }
 
+int	ft_monitor_meals(t_philo philo[PHILO_MAX])
+{
+	int		i;
+	t_args	*args;
+
+	args = philo[0].args;
+	i = 0;
+	while (i < args->size)
+	{
+		pthread_mutex_lock(&philo[i].lock_meal);
+		if (philo[i].meal_count < args->meal_min)
+		{
+			pthread_mutex_unlock(&philo[i].lock_meal);
+			return (0);
+		}
+		pthread_mutex_unlock(&philo[i].lock_meal);
+		i++;
+	}
+	pthread_mutex_lock(&args->lock_death);
+	args->is_dead = 1;
+	pthread_mutex_unlock(&args->lock_death);
+	return (1);
+}
+
 void	*ft_thread_monitor(void *arg)
 {
-	t_philo	**philos;
+	t_philo	*philos;
 	t_args	*args;
 	long	time_curr;
 	int		i;
 
 	philos = arg;
-	args = philos[0]->args;
+	args = philos[0].args;
 	while (1)
 	{
 		i = 0;
+		if (args->meal_min > -1 && ft_monitor_meals(philos))
+			return (NULL);
 		time_curr = ft_timestamp() - args->time_start;
 		while (i < args->size)
 		{
-			if (ft_monitor_philo(&(*philos)[i], time_curr))
+			if (ft_monitor_philo(&philos[i], time_curr))
 				return (NULL);
 			i++;
 		}

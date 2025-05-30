@@ -12,7 +12,8 @@
 
 #include "philo.h"
 
-int	ft_philo_isdead(t_philo *philo);
+int		ft_philo_isdead(t_philo *philo);
+
 long	ft_timestamp(void)
 {
 	struct timeval	tv;
@@ -21,15 +22,15 @@ long	ft_timestamp(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void	ft_msleep(t_philo * philo,long ms)
+void	ft_msleep(t_philo *philo, long ms)
 {
 	long	curr;
 
 	curr = ft_timestamp();
 	while ((ft_timestamp() - curr) < ms)
-    {
-        if(ft_philo_isdead(philo))
-            return ;
-        usleep(500);
-    }
+	{
+		if (ft_philo_isdead(philo))
+			return ;
+		usleep(100);
+	}
 }

@@ -48,9 +48,9 @@ void	ft_philo_forks_put(t_philo *philo)
 	pthread_mutex_unlock(philo->fork_right);
 	pthread_mutex_unlock(philo->fork_left);
 	ft_philo_logs(philo, "is sleeping");
-	ft_msleep(philo,philo->args->time_sleep);
+	ft_msleep(philo, philo->args->time_sleep);
 	ft_philo_logs(philo, "is thinking");
-    usleep(500);
+	usleep(500);
 }
 
 void	*ft_thread_philo(void *arg)
@@ -71,7 +71,7 @@ void	*ft_thread_philo(void *arg)
 		philo->meal_count++;
 		ft_philo_logs(philo, "is eating");
 		pthread_mutex_unlock(&philo->lock_meal);
-		ft_msleep(philo,philo->args->time_eat);
+		ft_msleep(philo, philo->args->time_eat);
 		ft_philo_forks_put(philo);
 	}
 	return (NULL);

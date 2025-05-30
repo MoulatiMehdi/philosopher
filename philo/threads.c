@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	ft_threads_start(t_philo **philos, t_args *args)
+int	ft_threads_start(t_philo philos[PHILO_MAX], t_args *args)
 {
 	int	i;
 
@@ -20,8 +20,8 @@ int	ft_threads_start(t_philo **philos, t_args *args)
 	i = 0;
 	while (i < args->size)
 	{
-		if (pthread_create(&(*philos)[i].thread, NULL, ft_thread_philo,
-			&(*philos)[i]))
+		if (pthread_create(&philos[i].thread, NULL, ft_thread_philo,
+				&philos[i]))
 			return (0);
 		i++;
 	}
@@ -30,7 +30,7 @@ int	ft_threads_start(t_philo **philos, t_args *args)
 	return (1);
 }
 
-int	ft_threads_wait(t_philo **philo, t_args *args)
+int	ft_threads_wait(t_philo philo[PHILO_MAX], t_args *args)
 {
 	int	i;
 	int	status;
@@ -40,7 +40,7 @@ int	ft_threads_wait(t_philo **philo, t_args *args)
 	pthread_join(args->monitor, NULL);
 	while (i < args->size)
 	{
-		if (pthread_join((*philo)[i].thread, NULL))
+		if (pthread_join(philo[i].thread, NULL))
 			status = 0;
 		i++;
 	}

@@ -53,17 +53,17 @@ typedef struct s_philo
 	pthread_t			thread;
 }						t_philo;
 
-int						ft_philos_init(t_philo **philos, t_fork **forks,
-							t_args *args);
-
+int						ft_philos_init(t_philo philos[PHILO_MAX],
+							t_fork forks[PHILO_MAX], t_args *args);
 void					ft_free_memory(t_philo *philo, t_fork *fork);
 
-void	ft_msleep(t_philo * philo,long ms);
+void					ft_msleep(t_philo *philo, long ms);
 long					ft_timestamp(void);
 
 int						ft_threads_stop(t_args *args);
-int						ft_threads_start(t_philo **philo, t_args *args);
-int						ft_threads_wait(t_philo **philo, t_args *args);
+int						ft_threads_start(t_philo philos[PHILO_MAX],
+							t_args *args);
+int						ft_threads_wait(t_philo philo[PHILO_MAX], t_args *args);
 
 void					*ft_thread_philo(void *arg);
 void					*ft_thread_monitor(void *arg);

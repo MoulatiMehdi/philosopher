@@ -44,16 +44,15 @@ int	ft_args_init(t_args *args, int argc, char **argv)
 int	main(int argc, char *argv[])
 {
 	t_args	args;
-	t_philo	*philo;
-	t_fork	*forks;
+	t_philo	philo[PHILO_MAX];
+	t_fork	forks[PHILO_MAX];
 
 	if (!ft_args_init(&args, argc, argv))
 		return (EXIT_FAILURE);
-	if (!ft_philos_init(&philo, &forks, &args))
+	if (!ft_philos_init(philo, forks, &args))
 		return (EXIT_FAILURE);
-	if (!ft_threads_start(&philo, &args))
+	if (!ft_threads_start(philo, &args))
 		ft_threads_stop(&args);
-	ft_threads_wait(&philo, &args);
-	ft_free_memory(philo, forks);
+	ft_threads_wait(philo, &args);
 	return (EXIT_SUCCESS);
 }
