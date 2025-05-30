@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   args.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/30 18:29:24 by mmoulati          #+#    #+#             */
+/*   Updated: 2025/05/30 18:29:25 by mmoulati         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_args_semaphore_init(t_args *args)
@@ -5,12 +17,12 @@ int	ft_args_semaphore_init(t_args *args)
 	sem_unlink(SEM_END);
 	sem_unlink(SEM_FORK);
 	sem_unlink(SEM_WRITE);
-	args->lock_death = sem_open("/sem_death", O_CREAT, 0644, 1);
-	args->lock_write = sem_open("/sem_write", O_CREAT, 0644, 1);
-	args->lock_forks = sem_open("/sem_fork", O_CREAT, 0644, args->size);
-	sem_unlink("/sem_write");
-	sem_unlink("/sem_death");
-	sem_unlink("/sem_fork");
+	args->lock_death = sem_open(SEM_END, O_CREAT, 0644, 1);
+	args->lock_write = sem_open(SEM_WRITE, O_CREAT, 0644, 1);
+	args->lock_forks = sem_open(SEM_FORK, O_CREAT, 0644, args->size);
+	sem_unlink(SEM_WRITE);
+	sem_unlink(SEM_END);
+	sem_unlink(SEM_FORK);
 	sem_wait(args->lock_death);
 	return (0);
 }

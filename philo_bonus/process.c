@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmoulati <mmoulati@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/30 18:29:41 by mmoulati          #+#    #+#             */
+/*   Updated: 2025/05/30 18:29:42 by mmoulati         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 #include <pthread.h>
 
@@ -50,7 +62,7 @@ int	ft_process_stop(t_philo **philos, t_args *args)
 	curr = 0;
 	while (curr < args->size)
 	{
-		kill((*philos)[curr].pid, SIGTERM);
+		kill((*philos)[curr].pid, SIGKILL);
 		curr++;
 	}
 	return (1);

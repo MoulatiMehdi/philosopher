@@ -32,9 +32,10 @@ void	*ft_thread_monitor(void *arg)
 			sem_wait(args->lock_write);
 			printf("%013ld %d died\n", time_curr, philo->id + 1);
 			sem_post(args->lock_death);
+			break ;
 		}
-        usleep(1000);
-    }
+		usleep(500);
+	}
 	return (NULL);
 }
 
