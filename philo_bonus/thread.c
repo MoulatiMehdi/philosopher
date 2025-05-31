@@ -41,11 +41,11 @@ void	*ft_thread_monitor(void *arg)
 
 void	*ft_thread_philos_kill(void *arg)
 {
-	t_philo	**philos;
+	t_philo	*philos;
 	t_args	*args;
 
 	philos = arg;
-	args = philos[0]->args;
+	args = philos[0].args;
 	sem_wait(args->lock_death);
 	ft_process_stop(philos, args);
 	return (NULL);

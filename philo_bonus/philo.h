@@ -55,15 +55,15 @@ typedef struct s_philo
 	pid_t				pid;
 }						t_philo;
 
-int						ft_philos_init(t_philo **philos, t_args *args);
-void					ft_philos_destroy(t_philo *philos, t_args *args);
+int						ft_philos_init(t_philo philos[PHILO_MAX], t_args *args);
+void					ft_philos_destroy(t_philo philos[PHILO_MAX], t_args *args);
 
 void					ft_msleep(long miliseconds);
 long					ft_timestamp(void);
 
-int						ft_process_stop(t_philo **philos, t_args *args);
-int						ft_process_start(t_philo **philo, t_args *args);
-int						ft_process_wait(t_philo **philo, t_args *args);
+int						ft_process_stop(t_philo philos[PHILO_MAX], t_args *args);
+int						ft_process_start(t_philo philo[PHILO_MAX], t_args *args);
+int						ft_process_wait(t_philo philo[PHILO_MAX], t_args *args);
 
 void					*ft_process_philo(t_philo *philo);
 void					*ft_thread_monitor(void *arg);

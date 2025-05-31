@@ -1,25 +1,24 @@
-CC = cc CCFLAGS = -Wall - Wextra - Werror - g - fsanitize = thread
+CC = cc 
+CCFLAGS = -Wall -Wextra -Werror 
+SRCS = args.c main.c philo.c process.c process_philo.c thread.c time.c 
+OBJS = $(SRCS:%.c=%.o)
+NAME = philo_bonus
 
-						SRCS = args.c main.c philo.c process.c process_philo.c thread.c time.c OBJS = $(SRCS
-																										:
-																											%.c =
-																											%.o)
+all : $(NAME)
 
-							NAME = philo_bonus
+$(NAME): $(OBJS) philo.h 
+	$(CC) $(CCFLAGS) $(OBJS) -o $@
 
-										all : $(NAME)
+%.o : %.c 
+	$(CC) $(CCFLAGS) $< -c -o $@
 
-												$(NAME)
-	: $(OBJS) philo.h $(CC) $(CCFLAGS) $(OBJS) -
-		o $ @
+clean : 
+	rm -rf $(OBJS)
 
-			%.o : %.c $(CC) $(CCFLAGS) $ <
-	-c - o $ @clean : rm -
-						rf $(OBJS)
+fclean : clean 
+	rm -rf $(NAME) 
 
-							fclean : clean rm -
-									rf $(NAME) $(B_NAME)
+re : fclean all
 
-										re : fclean all
-
-												.PHONY : clean re fclean all.SECONDARY : $(OBJS)
+.PHONY : clean re fclean all
+.SECONDARY : $(OBJS)

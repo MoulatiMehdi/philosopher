@@ -44,18 +44,15 @@ void	ft_philo_init(t_philo *philo, t_args *args)
 	sem_unlink(sem_name);
 }
 
-int	ft_philos_init(t_philo **philos, t_args *args)
+int	ft_philos_init(t_philo philos[PHILO_MAX], t_args *args)
 {
 	int	id;
 
-	*philos = malloc(sizeof(t_philo) * args->size);
-	if (*philos == NULL)
-		return (0);
 	id = 0;
 	while (id < args->size)
 	{
-		(*philos)[id].id = id;
-		ft_philo_init(&(*philos)[id], args);
+		philos[id].id = id;
+		ft_philo_init(&philos[id], args);
 		id++;
 	}
 	return (1);
