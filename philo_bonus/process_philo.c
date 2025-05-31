@@ -38,6 +38,8 @@ static void	ft_philo_forks_put(t_philo *philo)
 	ft_philo_logs(philo, "is sleeping");
 	ft_msleep(philo->args->time_sleep);
 	ft_philo_logs(philo, "is thinking");
+	ft_msleep(philo->args->time_die - philo->args->time_eat
+		- philo->args->time_sleep - 60);
 }
 
 void	*ft_process_philo(t_philo *philo)
@@ -46,7 +48,7 @@ void	*ft_process_philo(t_philo *philo)
 
 	pthread_create(&monitor, NULL, ft_thread_monitor, philo);
 	if (philo->id % 2 != 0)
-		ft_msleep(philo->args->time_eat);
+		ft_msleep(philo->args->time_eat - 10);
 	while (1)
 	{
 		if (philo->meal_count >= philo->args->meal_min
@@ -56,12 +58,10 @@ void	*ft_process_philo(t_philo *philo)
 		sem_wait(philo->lock_meal);
 		philo->meal_last = ft_timestamp() - philo->args->time_start;
 		philo->meal_count++;
-		ft_philo_logs(philo, "is eating");
 		sem_post(philo->lock_meal);
+		ft_philo_logs(philo, "is eating");
 		ft_msleep(philo->args->time_eat);
 		ft_philo_forks_put(philo);
-		ft_msleep(philo->args->time_die - philo->args->time_eat
-			- philo->args->time_sleep - 60);
 	}
 	sem_post(philo->args->lock_death);
 	return (NULL);

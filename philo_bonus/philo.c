@@ -60,14 +60,15 @@ int	ft_philos_init(t_philo philos[PHILO_MAX], t_args *args)
 
 void	ft_philos_destroy(t_philo *philos, t_args *args)
 {
-    long i;
+	long	i;
+
 	sem_close(args->lock_death);
 	sem_close(args->lock_write);
 	sem_close(args->lock_forks);
-    i = args->size;
-    while(i < args->size)
-    {
-        sem_close(philos[i].lock_meal);
-        i++;
-    }
+	i = args->size;
+	while (i < args->size)
+	{
+		sem_close(philos[i].lock_meal);
+		i++;
+	}
 }
