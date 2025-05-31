@@ -55,10 +55,10 @@ void	*ft_process_philo(t_philo *philo)
 		ft_philo_fork_take(philo);
 		sem_wait(philo->lock_meal);
 		philo->meal_last = ft_timestamp() - philo->args->time_start;
-		sem_post(philo->lock_meal);
-		ft_philo_logs(philo, "is eating");
-		ft_msleep(philo->args->time_eat);
 		philo->meal_count++;
+		ft_philo_logs(philo, "is eating");
+		sem_post(philo->lock_meal);
+		ft_msleep(philo->args->time_eat);
 		ft_philo_forks_put(philo);
 		ft_msleep(philo->args->time_die - philo->args->time_eat
 			- philo->args->time_sleep - 60);
