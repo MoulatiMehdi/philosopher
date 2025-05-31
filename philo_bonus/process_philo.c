@@ -48,7 +48,7 @@ void	*ft_process_philo(t_philo *philo)
 
 	pthread_create(&monitor, NULL, ft_thread_monitor, philo);
 	if (philo->id % 2 != 0)
-		ft_msleep(philo->args->time_eat - 10);
+		ft_msleep(philo->args->time_die - 60);
 	while (1)
 	{
 		if (philo->meal_count >= philo->args->meal_min
